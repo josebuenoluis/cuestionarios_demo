@@ -1,6 +1,7 @@
 let containerAvatarSelected = document.getElementById("containerAvatarSelected");
 let modalUpdateDates = document.getElementById("modalUpdateDates");
 let modalCambiar = new bootstrap.Modal(document.getElementById('modalUpdateDates'));
+let modalAvatar = new bootstrap.Modal(document.getElementById('staticBackdrop'));
 let btnGuardarModalUpdate = document.getElementById("btnGuardarModalUpdate");
 
 function seleccionarAvatar(event) {
@@ -22,7 +23,6 @@ function guardarAvatar() {
             let avatarReemplazar = avatarUserContainer.querySelector("svg");
             avatarReemplazar.remove();
             avatarUserContainer.insertBefore(containerAvatarSelected.querySelector("svg").cloneNode(true), avatarUserContainer.firstChild);
-            let modalAvatar = new bootstrap.Modal(document.getElementById('staticBackdrop'));
             modalAvatar.hide();
         }else{
             console.log("No se pudo guardar el avatar");

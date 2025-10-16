@@ -25,15 +25,57 @@
                             </svg>
                         </div>
                         <form action="#" method="post">
+                        
                             {% csrf_token %}
                             {{form}}
                             <!-- <input type="email" class="form-control my-4 py-2" name="correo" placeholder="Password"> -->
                             <div class="text-center mt-3">
-                                <button class="btn btn-primary">Iniciar sesión</button>
-                                <a href="{% url 'authentication/forgot' %}" class="nav-link mt-2">Recuperar contraseña</a>
+                                <div class="d-flex flex-column align-items-center justify-content-center">
+                                    <button class="btn btn-secondary mb-3" type="button" data-bs-toggle="modal" data-bs-target="#modalUsers">Usuarios de prueba</button>
+                                    <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+                                </div>
+                                <a href="{% url 'authentication/forgot' %}" class="nav-link">Recuperar contraseña</a>
                                 <a href="{% url 'authentication/register' %}" class="nav-link">¿Ya tienes una cuenta?</a>
                             </div>
                         </form>
+                    </div>
+                </div>
+                <div class="modal fade" id="modalUsers" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel2" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="staticBackdropLabel2">Usuarios</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <ul style="padding: 0; list-style: none;min-height: 200px; max-height: 400px; overflow-y: auto;overflow-x: hidden;" id="usersList">
+                                    {% for usuario in usuarios %}
+                                    <li>
+                                        <div class="row d-flex justify-content-center">
+                                            <div class="col-12 col-lg-10">
+                                                <div class="alert alert-info d-flex align-items-center justify-content-between" role="alert" onclick="seleccionarUsuario(event)">
+                                                    <div class="d-flex flex-column align-items-start">
+                                                        <span class="d-flex align-items-end">
+                                                            <span class="fw-bold" style="margin-right: 40px;">Usuario:</span>
+                                                            <span>{{usuario.username}}</span>
+                                                        </span>
+                                                        <span class="d-flex align-items-end">
+                                                            <span class="fw-bold" style="margin-right: 12px;">Contraseña:</span>
+                                                            <span>pruebausuario12345678</span>
+                                                        </span>
+                                                    </div>
+                                                    <div class="rounded-circle border border-dark border-3 bg-light p-2">
+                                                        {{usuario.avatar|safe}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li> 
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            
+                        </div>
                     </div>
                 </div>
             </div>

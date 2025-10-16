@@ -1,0 +1,12 @@
+#usersList li:hover {
+    cursor: pointer;
+}
+
+#usersList .alert:hover{
+    background-color: rgb(46, 74, 228);
+    color: white;
+}
+
+#usersList .alert:active{
+    opacity: .6;
+}

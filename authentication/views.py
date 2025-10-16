@@ -9,6 +9,7 @@ from .forms import UserLoginForm,UserRegisterForm
 from django.http import JsonResponse
 import json
 from panel.utils import enviarCorreo
+from .utils import crearUsuarioAuto
 
 
 # Create your views here.
@@ -19,7 +20,8 @@ class LoginView(View):
         if request.user.is_authenticated:
             return redirect("panel")
         else: 
-            return render(request,'authentication/login.html',{"form":form})
+            users = Usuarios.objects.filter(is_superuser=False)
+            return render(request,'authentication/login.html',{"form":form,"usuarios":users})
         
     def post(self,request):
 
@@ -62,7 +64,9 @@ class RegisterView(View):
     def get(self,request):
         form = UserRegisterForm()
         avatares = obtener_avatares_cache()
-        return render(request,'authentication/register.html',{"form":form,'avatares':avatares,'avatar_usuario':avatares[0]})
+        new_user = crearUsuarioAuto()
+        return render(request,'authentication/register.html',{"form":form,'avatares':avatares,'avatar_usuario':avatares[0],
+                                                              "user":new_user})
 
     def post(self,request):
         form = UserRegisterForm(request.POST)

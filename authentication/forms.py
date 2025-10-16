@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm,AuthenticationForm,PasswordChangeForm
 from .models import Usuarios
-
+from .utils import crearUsuarioAuto
 class UserLoginForm(AuthenticationForm):
 
     username = forms.CharField(
@@ -9,7 +9,8 @@ class UserLoginForm(AuthenticationForm):
         widget=forms.TextInput(
             attrs={
                 'class':'form-control my-4 py-2',
-                'placeholder':'Enter your username'
+                'placeholder':'Enter your username',
+                'readonly':True
             }
         )
     )
@@ -19,7 +20,8 @@ class UserLoginForm(AuthenticationForm):
         widget=forms.PasswordInput(
             attrs={
                 'class':'form-control my-4 py-2',
-                'placeholder':'Enter your password'
+                'placeholder':'Enter your password',
+                'readonly':True
             }
         )
     )
@@ -29,14 +31,19 @@ class UserLoginForm(AuthenticationForm):
         fields = ["username","password"]
 
 class UserRegisterForm(UserCreationForm):
+
+    new_user = crearUsuarioAuto()
     username = forms.CharField(
         label='',
+        initial=new_user["username"],
         widget=forms.TextInput(
             attrs={
                 'class':'form-control my-4 py-2',
                 'placeholder':'Enter your username'
             }
-        )
+        ),
+        disabled=True,
+        
     )
 
     password1 = forms.CharField(
@@ -44,7 +51,8 @@ class UserRegisterForm(UserCreationForm):
         widget=forms.PasswordInput(
             attrs={
                 'class':'form-control my-4 py-2',
-                'placeholder':'Enter your password'
+                'placeholder':'Enter your password',
+                'readonly':True
             }
         )
     )
@@ -54,19 +62,22 @@ class UserRegisterForm(UserCreationForm):
         widget=forms.PasswordInput(
             attrs={
                 'class':'form-control my-4 py-2',
-                'placeholder':'Confirm your password'
+                'placeholder':'Confirm your password',
+                'readonly':True
             }
         )
     )
 
     email = forms.CharField(
         label='',
+        initial=new_user["email"],
         widget=forms.EmailInput(
             attrs={
                 'class':'form-control my-4 py-2',
                 'placeholder':'Email'
             }
-        )
+        ),
+        disabled=True
     )
 
     avatar = forms.CharField(
