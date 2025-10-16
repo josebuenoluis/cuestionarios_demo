@@ -1,0 +1,45 @@
+{% extends 'core/base.html' %}
+
+{% load static %} 
+{% block title%} Login {% endblock %} 
+{% block styles %}
+<link href="{% static 'authentication/css/login.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+    <main class="container">
+        <div class="row py-3 mb-4">
+            <div class="col-12">
+                <div class="border-bottom">
+                    <h1 class="text-center">Iniciar sesión</h1>
+                </div>
+            </div>
+        </div>
+        <div class="row d-flex justify-content-center align-items-center mb-5">
+            <div class="col-12 col-lg-6">
+                <div class="card border-0 shadow">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-center align-items-center">
+                            <svg class="mx-auto w-25 h-25" xmlns="http://www.w3.org/2000/svg" fill="black" viewBox="0 0 16 16">
+                                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                            </svg>
+                        </div>
+                        <form action="#" method="post">
+                            {% csrf_token %}
+                            {{form}}
+                            <!-- <input type="email" class="form-control my-4 py-2" name="correo" placeholder="Password"> -->
+                            <div class="text-center mt-3">
+                                <button class="btn btn-primary">Iniciar sesión</button>
+                                <a href="{% url 'authentication/forgot' %}" class="nav-link mt-2">Recuperar contraseña</a>
+                                <a href="{% url 'authentication/register' %}" class="nav-link">¿Ya tienes una cuenta?</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %} 
+{% block scripts %}
+<script src="{% static 'authentication/js/login.js' %}"></script>
+{% endblock %}

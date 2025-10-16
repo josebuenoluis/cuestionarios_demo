@@ -1,0 +1,20 @@
+form > .row > .col-10 > .form-check.save{
+    background-color: white;
+}
+form > .row > div.col-10 > .form-check:hover,
+form > .row > div.col-10 > .form-check label:hover
+{
+    cursor: pointer;
+}
+form > .row > div.col-10 > .form-check:hover
+{
+    background-color: rgb(202, 245, 202);
+}
+.button-edit > i {
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.button-edit > i:hover {
+  color: #9b8d8d;
+  transform: scale(1.2);
+}

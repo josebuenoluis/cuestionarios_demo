@@ -1,0 +1,160 @@
+{% extends 'core/base.html' %}
+
+{% load static %} 
+{% block title%} Login {% endblock %} 
+{% block styles %}
+<link href="{% static 'panel/css/panel.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+    <main class="container">
+        <div class="row py-3 mb-4">
+            <div class="col-12">
+                <div class="border-bottom">
+                    <h1 class="text-center">Panel</h1>
+                </div>
+            </div>
+        </div>
+        <div class="row d-flex justify-content-center align-items-center mb-5">
+            <div class="col-12 col-lg-10">
+                <div class="card border-0 shadow">
+                    <div class="card-body">
+                        <div class="d-flex flex-column align-self-center justify-content-center align-items-center"
+                        id="avatarUserContainer"
+                        >
+                            {{avatar_usuario|safe}}
+                            <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                Editar avatar
+                            </button>
+                        </div>
+                        <div class="row g-2 justify-content-center my-3">
+                            <div class="col-10 col-lg-6">
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <svg class="mx-auto" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="black" viewBox="0 0 16 16">
+                                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                                            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                                        </svg>
+                                    </span>
+                                    <div class="form-floating flex-grow-1">
+                                        <input
+                                        type="text"
+                                        class="form-control bg-light"
+                                        id="username"
+                                        placeholder="Username"
+                                        value="{{nombre_usuario}}"
+                                        readonly
+                                        data-bs-toggle="modal" 
+                                        data-bs-target="#modalUpdateDates"
+                                        onclick="modalCambiarUsuario()"
+                                        />
+                                        <label for="username">Username</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row g-2 justify-content-center my-3">
+                            <div class="col-10 col-lg-6">
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <svg class="mx-auto" width="20" height="20" fill="black" viewBox="0 0 16 16">
+                                            <use href="{% static 'core/img/email-icon.svg' %}" />
+                                        </svg>
+                                    </span>
+                                    <div class="form-floating flex-grow-1">
+                                        <input
+                                        type="text"
+                                        class="form-control bg-light"
+                                        id="email"
+                                        placeholder="Email"
+                                        value="{{email}}"
+                                        readonly
+                                        data-bs-toggle="modal" 
+                                        data-bs-target="#modalUpdateDates"
+                                        onclick="modalCambiarEmail()"
+                                        />
+                                        <label for="email">Email</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row g-2 justify-content-center my-3">
+                            <div class="col-10 col-lg-6">
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <svg class="mx-auto" width="20" height="20" fill="black" viewBox="0 0 16 16">
+                                            <use href="{% static 'core/img/lock-icon.svg' %}" />
+                                        </svg>
+                                    </span>
+                                    <div class="form-floating flex-grow-1">
+                                        <input
+                                        type="text"
+                                        class="form-control bg-light"
+                                        id="password"
+                                        value="Presione para cambiar contraseña"
+                                        readonly
+                                        data-bs-toggle="modal" 
+                                        data-bs-target="#modalUpdateDates"
+                                        onclick="modalCambiarPassword()"
+                                        />
+                                        <label for="password">Password</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Avatares</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="d-flex justify-content-center align-items-center" id="containerAvatarSelected">
+                                            {{ avatar_usuario|safe }}
+                                        </div>
+                                        <div class="d-flex align-items-center flex-wrap" id="container-avatares">
+                                            {% for avatar in avatares %}
+                                                <div class="d-flex flex-column justify-content-center align-items-center align-self-center m-3" onclick="seleccionarAvatar(event)">
+                                                    {{ avatar|safe }}
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                        <button type="button" class="btn btn-primary" onclick="guardarAvatar()">Guardar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal fade" id="modalUpdateDates" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel2" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="staticBackdropLabel2">Avatares</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                        <button type="button" class="btn btn-primary" id="btnGuardarModalUpdate">Guardar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row g-2 justify-content-center my-3">
+                            <div class="col-10 col-lg-6 d-flex justify-content-center">
+                                <a href="{% url 'authentication/logout' %}" class="btn btn-danger w-100 fs-5 py-2">Cerrar sesión</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %} 
+{% block scripts %}
+<script src="{% static 'panel/js/panel.js' %}"></script>
+{% endblock %}

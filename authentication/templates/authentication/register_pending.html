@@ -1,0 +1,53 @@
+{% extends 'core/base.html' %}
+
+{% load static %} 
+{% block title %} Revisa tu Correo Electrónico {% endblock %} 
+
+{% block content %}
+    <main class="container py-5">
+        <div class="row d-flex justify-content-center align-items-center mb-5">
+            <div class="col-12 col-lg-8">
+                <div class="card border-0 shadow">
+                    <div class="card-body p-4 p-md-5 text-center">
+                        
+                        <div class="mb-4">
+                            <span style="font-size: 4rem;">📨</span>
+                        </div>
+                        
+                        <h1 class="card-title text-primary mb-3">¡Registro Exitoso!</h1>
+                        
+                        <p class="card-text lead mb-4">
+                            Necesitas activar tu cuenta para poder iniciar sesión.
+                        </p>
+                        
+                        <h2 class="h5 mb-3 text-muted">
+                            Por favor, <b>revisa tu bandeja de entrada</b>
+                        </h2>
+
+                        <p class="text-muted small">
+                            Hemos enviado un enlace de activación a la dirección de correo electrónico que proporcionaste. Si no lo encuentras, revisa tu carpeta de <b>spam</p>.
+                        </p>
+                        <p id="redirectText" class="lead">
+                            Tu cuenta se verificará en <strong id="countdown" aria-live="polite">30</strong> segundos; luego serás redirigido automáticamente.
+                        </p>
+                        <p class="small text-muted">
+                            Si no quieres esperar, puedes cerrar esta página o usar el botón "Reenviar Email de Activación".
+                        </p>
+                        <div class="mt-4 pt-3 border-top">
+                            <p class="small mb-2">¿No has recibido el correo?</p>
+                            <a href="#" class="btn btn-outline-primary btn-sm">
+                                Reenviar Email de Activación
+                            </a>
+                        
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+{%block scripts %}
+    {{ token|json_script:"token-data" }}
+    <script src="{% static 'authentication/js/register_pending.js' %}"></script>
+{% endblock %}

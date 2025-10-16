@@ -1,0 +1,64 @@
+{
+  "cuestionario": [
+    {
+      "pregunta": "¿En qué país realizó José Bueno Luis sus prácticas en empresa?",
+      "opciones": [
+        "a) España",
+        "b) Portugal",
+        "c) Venezuela",
+        "d) Inglaterra"
+      ],
+      "respuesta_correcta": 1
+    },
+    {
+      "pregunta": "¿Qué tipo de aplicaciones móviles compilaba José Bueno Luis durante sus prácticas?",
+      "opciones": [
+        "a) Con React Native",
+        "b) Con Ionic y Angular 17",
+        "c) Con Flutter",
+        "d) Con Xamarin"
+      ],
+      "respuesta_correcta": 1
+    },
+    {
+      "pregunta": "¿En qué año finalizó José Bueno Luis su formación académica en Unidad Educativa Juan XXIII?",
+      "opciones": [
+        "a) 2018",
+        "b) 2019",
+        "c) 2020",
+        "d) 2021"
+      ],
+      "respuesta_correcta": 1
+    },
+    {
+      "pregunta": "¿Cuál es el nivel de inglés técnico de José Bueno Luis?",
+      "opciones": [
+        "a) B1.2",
+        "b) A2.2",
+        "c) C1",
+        "d) B2"
+      ],
+      "respuesta_correcta": 1
+    },
+    {
+      "pregunta": "¿Dónde realizó José Bueno Luis un curso de fundamentos de JavaScript?",
+      "opciones": [
+        "a) Open Webinars",
+        "b) Escuela Oficial de Idiomas",
+        "c) Universidad",
+        "d) Instituto Tecnológico"
+      ],
+      "respuesta_correcta": 0
+    },
+    {
+      "pregunta": "¿Qué tipo de desarrollo de interfaces realizaba José Bueno Luis durante sus prácticas?",
+      "opciones": [
+        "a) Con React",
+        "b) Con Vue.js",
+        "c) Con Angular 17",
+        "d) Con Django"
+      ],
+      "respuesta_correcta": 2
+    }
+  ]
+}

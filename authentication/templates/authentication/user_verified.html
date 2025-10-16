@@ -1,0 +1,35 @@
+{% extends 'core/base.html' %}
+
+{% load static %} 
+{% block title %} Cuenta Verificada con Éxito {% endblock %} 
+
+{% block content %}
+    <main class="container py-5">
+        <div class="row d-flex justify-content-center align-items-center mb-5">
+            <div class="col-12 col-lg-8">
+                <div class="card border-0 shadow">
+                    <div class="card-body p-4 p-md-5 text-center">
+                        
+                        <div class="mb-4">
+                            <span style="font-size: 4rem;">✅</span>
+                        </div>
+                        
+                        <h1 class="card-title text-success mb-3">¡Cuenta Activada con Éxito!</h1>
+                        
+                        <p class="card-text lead">
+                            Tu dirección de correo electrónico ha sido <b>verificada</b>.
+                            Ya puedes acceder a todas las funcionalidades de nuestra plataforma.
+                        </p>
+                        
+                        <div class="mt-4">
+                            <a href="{% url 'authentication/login' %}" class="btn btn-success btn-lg">
+                                Iniciar Sesión Ahora
+                            </a>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

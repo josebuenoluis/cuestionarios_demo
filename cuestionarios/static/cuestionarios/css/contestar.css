@@ -1,0 +1,13 @@
+form > .row > div.col-10 > .form-check{
+    background-color: white;
+}
+
+form > .row > div.col-10 > .form-check:hover,
+form > .row > div.col-10 > .form-check label:hover
+{
+    cursor: pointer;
+}
+form > .row > div.col-10 > .form-check:hover
+{
+    background-color: rgb(202, 245, 202);
+}

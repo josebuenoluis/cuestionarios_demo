@@ -1,0 +1,95 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{% block title %}Inicio{% endblock %}
+
+{% block content %}
+
+<main class="container">
+    <!-- Carrusel -->
+    <div class="row">
+        <div class="col d-flex justify-content-around mb-5 my-5">
+            <img width="300" src="{% static 'core/img/libros.jpg' %}" alt="Libros">
+        </div>
+        <div class="col mb-5 my-5 align-self-center">
+            <div class="d-flex flex-column align-self-center">
+                <p>¡Bienvenido a cuestionarios.com! 
+                    Somos una plataforma diseñada para ayudarte a estudiar de manera fácil y efectiva, generando cuestionarios automáticamente sobre cualquier tema o asignatura.</p>
+                    <a href="{% url 'crear_cuestionario' %}">
+                        <img src="{% static 'core/img/enlace-cuestionario.png' %}" alt="Enlace">
+                    </a> 
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col mb-5">
+            <div class="carousel slide" id="carrusel" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="{% static 'core/img/imagen-carrusel-2.svg' %}" class="w-100" alt="Imagen 2">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="{% static 'core/img/imagen-carrusel-1.svg' %}" class="w-100" alt="Imagen 1">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="{% static 'core/img/imagen-carrusel-3.svg' %}" class="w-100" alt="Imagen 3">
+                    </div>
+                    
+                </div>
+                <!-- Controles de anterior y siguiente -->
+                 <button 
+                 class="carousel-control-prev" 
+                 type="button"
+                 data-bs-target="#carrusel"
+                 data-bs-slide="prev"
+                 >
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Anterior</span>
+
+                 </button>
+                 <button 
+                 class="carousel-control-next" 
+                 type="button"
+                 data-bs-target="#carrusel"
+                 data-bs-slide="next"
+                 >
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Siguiente</span>
+
+                 </button>
+                 <!-- Indicadores -->
+                  <div class="carousel-indicators">
+                    <button
+                    type="button"
+                    data-bs-target="#carrusel"
+                    data-bs-slide-to="0"
+                    class="active"
+                    aria-current="true"
+                    aria-label="Slide #1"
+                    ></button>
+
+                    <button
+                    type="button"
+                    data-bs-target="#carrusel"
+                    data-bs-slide-to="1"
+                    class="active"
+                    aria-current="true"
+                    aria-label="Slide #2"
+                    ></button>
+
+                    <button
+                    type="button"
+                    data-bs-target="#carrusel"
+                    data-bs-slide-to="2"
+                    class="active"
+                    aria-current="true"
+                    aria-label="Slide #3"
+                    ></button>
+                  </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+{% endblock %}

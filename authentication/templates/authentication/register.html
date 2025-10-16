@@ -1,0 +1,72 @@
+{% extends 'core/base.html' %}
+
+{% load static %} 
+{% block title%} Login {% endblock %} 
+{% block styles %}
+<link href="{% static 'authentication/css/register.css' %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+    <main class="container">
+        <div class="row py-3 mb-4">
+            <div class="col-12">
+                <div class="border-bottom">
+                    <h1 class="text-center">Registrarse</h1>
+                </div>
+            </div>
+        </div>
+        <div class="row d-flex justify-content-center align-items-center mb-5">
+            <div class="col-12 col-lg-6">
+                <div class="card border-0 shadow">
+                    <div class="card-body">
+                        <div class="d-flex flex-column align-self-center justify-content-center align-items-center"
+                        id="avatarUserContainer"
+                        >
+                            {{avatar_usuario|safe}}
+                            <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                Editar avatar
+                            </button>
+                        </div>
+                        <form action="#" method="post">
+                            {% csrf_token %}
+                            {{form}}
+                            <div class="text-center mt-3">
+                                <button class="btn btn-primary" type="submit">Registrar</button>
+                                <a href="{% url 'authentication/login' %}" class="nav-link">Ya tengo una cuenta</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Avatares</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="d-flex justify-content-center align-items-center" id="containerAvatarSelected">
+                            {{ avatar_usuario|safe }}
+                        </div>
+                        <div class="d-flex align-items-center flex-wrap" id="container-avatares">
+                            {% for avatar in avatares %}
+                                <div class="d-flex flex-column justify-content-center align-items-center align-self-center m-3" onclick="seleccionarAvatar(event)">
+                                    {{ avatar|safe }}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-primary" onclick="guardarAvatar()">Guardar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </main>
+{% endblock %} 
+{% block scripts %}
+<script src="{% static 'authentication/js/register.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,132 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{% block title %}Cuestionarios{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'cuestionarios/css/styles.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<main class="container d-flex flex-column min-vh-100">
+    <div class="row py-3">
+        <div class="col-12 col-lg-4 my-3 d-flex align-items-center">
+                <input 
+                type="text"
+                class="form-control me-2"
+                aria-label="Buscar"
+                placeholder="Buscar por nombre..."
+                name="busqueda"
+                id="busqueda"
+                >
+                <button class="btn btn-primary" onclick="consultaCiclosAsignaturas(event)" type="button">Buscar</button>
+        </div>
+        <div class="col-12 col-lg-3 my-3 d-flex align-items-center">
+            <div class="input-group">
+                <label class="input-group-text" for="tema">Tema</label>
+                <select name="tema" class="form-select" onchange="consultaCiclosAsignaturas(event)" id="tema">
+                  <option value="" selected>Elegir...</option>
+                  {% for tema in temas %}
+                    <option value="{{tema.id}}">{{tema.nombre}}</option>
+                  {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="col d-flex justify-content-center align-items-center my-3">
+            <a href="{% url 'crear_cuestionario' %}">
+                <button type="button" class="btn btn-success">Crear cuestonario</button>
+            </a>
+        </div>
+    </div>
+    <div class="row py-3">
+        <div class="col">
+            <div class="border-bottom">
+                <h1 class="text-center">Cuestionarios</h1>
+
+            </div>
+        </div>
+    </div>
+    <div class="row min-vh-100" id="container-cuestionarios">
+        {% for cuestionario in cuestionarios %}
+            <div class="col-12 col-sm-6 col-lg-3 mb-4">
+                <div class="card container-cuestionario">
+                    <div class="front">
+                        <img class="card-img-top" src="{% static 'core/img/cuestionarios-icono.jpg' %}">
+                        <div class="card-body d-flex flex-column justify-content-between">
+                            <div class="text-content">
+                                <h3 class="card-title">{{cuestionario.nombre_cuestionario}}</h3>
+                                <p class="card-text">{{cuestionario.descripcion_cuestionario}}</p>
+                            </div>
+                            <div class="botones d-flex justify-content-around">
+                                <a href="contestar/{{cuestionario.id}}" class="btn btn-sm btn-primary">Contestar</a>
+                                <input type="button" class="btn btn-sm btn-secondary" onclick="flipped(event)" value="Detalles">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="back">
+                        <div class="card-body d-flex flex-column justify-content-between">
+                            <div class="row">
+                                <div class="col d-flex flex-row-reverse">    
+                                    <button type="button" class="border-0" onclick="flipped(event)" style="background-color: white;">
+                                        <i class="bi bi-x fs-1"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <h3 class="card-title text-center">{{cuestionario.nombre_cuestionario}}</h3>
+                                    <ul class="atributos-cuestionario">
+                                        <li>
+                                            <p class="card-text m-0 fw-bold">Descripción:</p>
+                                            <p class="card-text">{{cuestionario.descripcion_cuestionario}}.</p>
+                                        </li>
+                                        <li>
+                                            <p class="card-text m-0 fw-bold">Tema:</p>
+                                            <p class="card-text">{{cuestionario.id_tema_fk.nombre}}</p>        
+                                        </li>
+                                        <li>
+                                            <p class="card-text m-0 fw-bold">Fecha de creación:</p>
+                                            <p class="card-text">{{cuestionario.fecha_creacion|date:"d/m/Y"}}</p>        
+                                        </li>
+                                        <li>
+                                            <p class="card-text m-0 fw-bold">Numero de preguntas:</p>
+                                            <p class="card-text">{{cuestionario.num_preguntas}}</p>        
+                                        </li>
+                                        <li>
+                                            <p class="card-text m-0 fw-bold">Numero de respuestas:</p>
+                                            <p class="card-text">{{cuestionario.num_respuestas}}</p>        
+                                        </li>
+                                        <li>
+                                            <p class="card-text m-0 fw-bold">Creado por:</p>
+                                            <p class="card-text">{{ cuestionario.nombre_usuario_fk.username }}</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="row">
+        <div class="col">
+            <nav aria-label="Navegacion">
+                <ul class="pagination justify-content-center">
+                <li class="page-item"><a class="page-link" href="{{anterior}}">Anterior</a></li>
+                {% for pagina in indices %}
+                    <li class="page-item"><a class="page-link" href="{{pagina.ruta}}">{{pagina.indice}}</a></li>  
+                {% endfor %}
+                <li class="page-item"><a class="page-link" href="{{siguiente}}">Siguiente</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</main>
+{% endblock %}
+
+{%block scripts %}
+    <script src="{% static 'cuestionarios/js/cuestionarios.js' %}"></script>
+{% endblock %}

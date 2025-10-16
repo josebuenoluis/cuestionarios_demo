@@ -1,0 +1,80 @@
+#container-cuestionarios > div > div{
+    height: 26rem;
+}
+.text-content{
+    height: 10rem;
+    overflow-y: auto;
+}
+
+.botones{
+    margin-top:1rem;
+}
+
+#container-cuestionarios > div > div{
+    transform-style: preserve-3d;
+    transition: transform 0.8s;
+}
+
+#container-cuestionarios > div > div .front,.back{
+    backface-visibility: hidden;
+}
+#container-cuestionarios > div > div .back{
+    position: absolute;
+    width: 100%;
+}
+#container-cuestionarios > div > div .back{
+    transform: rotateY(180deg);
+}
+#container-cuestionarios > div > div.flipped{
+    transform: rotateY(180deg);
+}
+
+#container-cuestionarios > div > div > div.back > div > div:nth-child(2) > div{
+    overflow-y: auto;
+    height: 20rem;
+}
+
+@media screen and (max-width: 990px) {
+    #container-cuestionarios > div > div {
+        height: 31rem;
+    }
+    .text-content{
+        height: 12rem;
+    }
+}
+
+@media screen and (max-width: 575px) {
+    #container-cuestionarios > div > div {
+        height: 40rem;
+    }
+    .text-content{
+        height: 12rem;
+    }
+}
+
+@media screen and (max-width: 473px) {
+    #container-cuestionarios > div > div {
+        height: 36rem;
+    }
+    .text-content{
+        height: 13rem;
+    }
+}
+
+@media screen and (max-width: 393px) {
+    #container-cuestionarios > div > div {
+        height: 31rem;
+    }
+    .text-content{
+        height: 11rem;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    #container-cuestionarios > div > div {
+        height: 30rem;
+    }
+    .text-content{
+        height: 13rem;
+    }
+}

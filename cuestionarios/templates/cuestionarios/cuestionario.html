@@ -1,0 +1,133 @@
+{% extends 'core/base.html' %}
+
+{% load static %} 
+{% block title%} Crear-Cuestionario{% endblock %} 
+{% block content %}
+
+<main class="container">
+  <div class="row">
+    <div class="row py-3">
+      <div class="col-12">
+        <div class="border-bottom">
+          <h1 class="text-center">Crear cuestionario</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+  <form action="/cuestionarios/crear" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="row justify-content-center">
+      <div class="col-10 col-lg-6 d-flex justify-content-around">
+        <div class="form-check">
+          <input class="form-check-input" type="radio" onchange="tipoPrompt()" name="type" id="typeFile" checked>
+          <label class="form-check-label" for="typeFile">
+            Desde PDF
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" onchange="tipoPrompt()" name="type" id="typePrompt">
+          <label class="form-check-label" for="typePrompt">
+            Desde prompt
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-10 col-lg-6" id="container-archivo">
+        <div class="mb-3">
+          <label for="formFile" class="form-label"></label>
+          <input
+            class="form-control"
+            type="file"
+            name="archivo"
+            id="formFile"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row my-4 justify-content-center" id="container-prompt" style="display: none;">
+      <div class="col-10 col-lg-6 d-flex flex-column align-items-center">
+        <p>Prompt del cuestionario</p>
+        <textarea
+        class="form-control"
+        placeholder="Describe tu cuestionario..."
+        style="height: 80px"
+        id="promptCuestionario"
+        name="prompt-cuestionarios"
+        ></textarea>
+        <label for="cuestionarioDescripcion"></label>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-8 col-lg-6 d-flex flex-column align-items-center mb-3">
+        <p>Nombre del cuestionario</p>
+        <input
+          type="text"
+          class="form-control me-2"
+          name="nombre"
+          aria-label="Nombre..."
+          placeholder="Nombre..."
+          id="nombreCuestionario"
+        />
+      </div>
+    </div>
+    <div class="row my-4 justify-content-center">
+      <div class="col-10 col-lg-6 d-flex flex-column align-items-center">
+        <p>Descripción del cuestionario</p>
+        <textarea
+        class="form-control"
+        placeholder="Descripción..."
+        style="height: 80px"
+        id="cuestionarioDescripcion"
+        name="descripcion"
+        ></textarea>
+        <label for="cuestionarioDescripcion"></label>
+      </div>
+    </div>
+    <div class="row my-4 justify-content-around flex-wrap">
+      <div class="col-6 col-lg-4 d-flex flex-column align-items-center">
+        <div class="input-group">
+          <label class="input-group-text" for="tema">Tema</label>
+          <select name="tema" class="form-select" id="tema">
+            <option selected>Elegir...</option>
+            {% for tema in temas %}
+              <option value="{{tema.id}}">{{tema.nombre}}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="row my-4 justify-content-around flex-wrap">
+      <div class="col-4 col-lg-4 d-flex flex-column align-items-center">
+        <p class="my-auto mb-2">NºPreguntas</p>
+        <input
+        type="number"
+        name="preguntas"
+        min="0"
+        value="0"
+        class="form-control text-center"
+        id="numeroPreguntas"
+        />
+      </div>
+      <div class="col-4 col-lg-4 d-flex flex-column align-items-center">
+        <p class="my-auto mb-2">NºRespuestas por pregunta</p>
+        <input
+        type="number"
+        name="respuestas"
+        min="0"
+        value="0"
+        class="form-control text-center"
+        id="numeroRespuestas"
+        />
+      </div>
+    <div class="row my-4">
+      <div class="col d-flex justify-content-center">
+        <button type="submit" name="enlace" value="generar" class="btn btn-success">
+          Generar cuestionario
+        </button>
+      </div>
+    </div>
+  </form>
+</main>
+<script src="{% static 'cuestionarios/js/cuestionarios.js' %}"></script>
+{% endblock %}

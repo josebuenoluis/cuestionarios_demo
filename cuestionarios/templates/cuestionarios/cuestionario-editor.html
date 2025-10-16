@@ -1,0 +1,62 @@
+{% extends 'core/base.html' %}
+
+{% load static %} 
+{% block title%} Contestar {% endblock %} 
+
+{% block styles %}
+    <link href="{% static 'cuestionarios/css/cuestionarios-editor.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+<div class="row">
+    <div class="row py-3">
+      <div class="col-12">
+        <div class="border-bottom">
+          <h1 class="text-center">{{cuestionario.nombre}}</h1>
+        </div>
+      </div>
+    </div>
+    <form action="/cuestionarios/contestar/{{cuestionario.id}}" method="post">
+        {% csrf_token %}
+        {% for pregunta in preguntas %}
+            <div class="row d-flex justify-content-center">
+                <div class="col-10 rounded border-4 border-start border-success" style="background: #f7f7f7; margin:10px 0; padding: 40px;" id="respuestas-pregunta-{{pregunta.pregunta.id}}">
+                    <div class="d-flex justify-content-between align-items-center mb-2">                        
+                        <h2 class="fs-3 mb-3">-{{pregunta.pregunta.pregunta}}</h2>
+                        <button type="button" onclick="editarPregunta(event)" class="border-0 fs-3 bg-transparent button-edit" id="btn-{{pregunta.pregunta.id}}">
+                            <i class="bi bi-pencil-fill"></i>
+                        </button>
+                    </div>
+                    {% for respuesta in pregunta.respuestas %}
+                        <div class="form-check save mb-2 rounded">
+                            <div class="d-flex flex-row justify-content-center align-items-center px-2">
+                                {% if respuesta.respuesta_correcta %}
+                                <input class="form-check-input" type="radio" name="{{pregunta.pregunta.id}}" value="{{respuesta.id}}" id="{{respuesta.id}}1" checked>
+                                {% else %}
+                                <input class="form-check-input" type="radio" name="{{pregunta.pregunta.id}}" value="{{respuesta.id}}" id="{{respuesta.id}}">
+                                {% endif %}
+                                <label class="form-check-label fs-6 ms-1 w-100 h-100 py-2" for="{{respuesta.id}}">
+                                    {{respuesta.respuesta}}
+                                </label>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+        <div class="row my-4">
+            <div class="col d-flex justify-content-center">
+                <button type="submit" class="btn btn-primary btn-lg mx-2" onclick="guardarFormulario(event)">Guardar</button>
+                <a href="/cuestionarios/" class="btn btn-danger btn-lg mx-2">Cancelar</a>
+            </div>
+        </div>
+        
+    </form>
+</div>
+{% endblock %} 
+
+{%block scripts %}
+    {{ cuestionario|json_script:"cuestionario-data" }}
+    <script src="{% static 'cuestionarios/js/cuestionarios-editor.js' %}"></script>
+{% endblock %}

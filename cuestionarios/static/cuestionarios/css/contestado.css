@@ -1,0 +1,11 @@
+form > .row > div.col-10 > .form-check{
+    background-color: white;
+}
+
+form > .row > div.col-10 > .form-check.success{
+    background-color: rgb(202, 245, 202);
+}
+
+form > .row > div.col-10 > .form-check.fail{
+    background-color: rgb(245, 213, 202);
+}

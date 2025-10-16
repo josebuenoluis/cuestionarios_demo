@@ -1,0 +1,21 @@
+
+- Estadisticas:
+     Ideas:
+	- NºPreguntas acertadas
+	- NºPreguntas falladas
+	- NºCuestionarios aprobados
+	- La calificaciones mas al
+	- El cuestionario que mas ha hecho
+	- Puntuacion total, la suma de todas sus notas
+	- Promedio de notas general del usuario
+	- Cuestionarios completados
+	- Categorias dominadas
+	- Categorias que no domina mucho
+     Definitivas:
+	- Puntuacion total
+	- Promedio general de calificaciones
+	- Cuestionarios completados
+	- Categorias dominadas
+	- Categorias menos dominantes
+	- NºPreguntas acertadas(Por cuestionario y general)
+	- NºPreguntas falladas(Por cuestionario y general)

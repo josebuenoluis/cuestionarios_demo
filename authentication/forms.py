@@ -1,0 +1,121 @@
+from django import forms
+from django.contrib.auth.forms import UserCreationForm,AuthenticationForm,PasswordChangeForm
+from .models import Usuarios
+
+class UserLoginForm(AuthenticationForm):
+
+    username = forms.CharField(
+        label='',
+        widget=forms.TextInput(
+            attrs={
+                'class':'form-control my-4 py-2',
+                'placeholder':'Enter your username'
+            }
+        )
+    )
+
+    password = forms.CharField(
+        label='',
+        widget=forms.PasswordInput(
+            attrs={
+                'class':'form-control my-4 py-2',
+                'placeholder':'Enter your password'
+            }
+        )
+    )
+
+    class Meta:
+        model = Usuarios
+        fields = ["username","password"]
+
+class UserRegisterForm(UserCreationForm):
+    username = forms.CharField(
+        label='',
+        widget=forms.TextInput(
+            attrs={
+                'class':'form-control my-4 py-2',
+                'placeholder':'Enter your username'
+            }
+        )
+    )
+
+    password1 = forms.CharField(
+        label='',
+        widget=forms.PasswordInput(
+            attrs={
+                'class':'form-control my-4 py-2',
+                'placeholder':'Enter your password'
+            }
+        )
+    )
+
+    password2 = forms.CharField(
+        label='',
+        widget=forms.PasswordInput(
+            attrs={
+                'class':'form-control my-4 py-2',
+                'placeholder':'Confirm your password'
+            }
+        )
+    )
+
+    email = forms.CharField(
+        label='',
+        widget=forms.EmailInput(
+            attrs={
+                'class':'form-control my-4 py-2',
+                'placeholder':'Email'
+            }
+        )
+    )
+
+    avatar = forms.CharField(
+        required=False,
+        widget=forms.HiddenInput(attrs={'id': 'avatar_input'})
+    )
+
+    class Meta:
+        model = Usuarios
+        fields = ["username","password1","password2","email",'avatar']
+
+class CustomPasswordChangeForm(PasswordChangeForm):
+    """
+    Formulario personalizado que hereda de PasswordChangeForm.
+    Usaremos esto principalmente para aplicar clases CSS (widgets)
+    y personalizar los labels si es necesario.
+    """
+    
+    # Sobrescribimos los campos para añadir widgets o personalizar labels/ayudas
+    old_password = forms.CharField(
+        label="Contraseña actual",
+        widget=forms.PasswordInput(
+            attrs={
+                'class':'form-control my-4 py-2',
+                'placeholder':'Contraseña actual'
+            }
+        )
+    )
+    
+    new_password1 = forms.CharField(
+        label="Nueva contraseña",
+        widget=forms.PasswordInput(
+            attrs={
+                'class':'form-control my-4 py-2',
+                'placeholder':'Nueva contraseña'
+            }
+        )
+    )
+    
+    new_password2 = forms.CharField(
+        label="Confirmar nueva contraseña",
+        widget=forms.PasswordInput(
+            attrs={
+                'class':'form-control my-4 py-2',
+                'placeholder':'Repetir contraseña'
+            }
+        )
+    )
+
+    class Meta:
+        model = Usuarios
+        fields = ["username","new_password1","new_password2"]
