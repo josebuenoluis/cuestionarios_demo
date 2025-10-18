@@ -89,6 +89,28 @@ function modalCambiarUsuario(){
     modalBody.appendChild(inpurUsername);
 }
 
+function modalInformativo() {
+    console.log("Modal informativo - función no disponible en versión demo");
+
+    // Cambiar el título del modal
+    document.getElementById("staticBackdropLabel2").textContent = "Función en desarrollo";
+
+    // Obtener el cuerpo del modal
+    let modalBody = modalUpdateDates.querySelector(".modal-body");
+    modalBody.innerHTML = "";
+
+    // Crear un mensaje informativo
+    let mensaje = document.createElement("p");
+    mensaje.textContent = "Esta función no está disponible en la versión demo. La versión completa del sistema se encuentra actualmente en desarrollo.";
+    mensaje.style.textAlign = "center";
+    mensaje.style.fontWeight = "bold";
+    mensaje.style.color = "#555";
+
+    // Agregar el mensaje al cuerpo del modal
+    modalBody.appendChild(mensaje);
+}
+
+
 function modalGenerarToken(){
     let modalBody = modalUpdateDates.querySelector(".modal-body");
     document.getElementById("staticBackdropLabel2").textContent = "Cambiar Email";

@@ -8,5 +8,5 @@ urlpatterns = [
     path('avatares/',AvataresView.as_view(),name="authentication/avatares"),
     path('forgot/',OlvidoPasswordView.as_view(),name="authentication/forgot"),
     path('token/<str:tipo>/',TokenAuthView.as_view(),name="authentication/token"),
-    path('verified/<str:token>/',user_verified_view,name="authentication/verified")
+    path('verified/<str:token>/',user_verified_view,name="authentication/verified"),
 ]

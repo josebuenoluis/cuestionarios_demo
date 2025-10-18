@@ -32,17 +32,15 @@ class UserLoginForm(AuthenticationForm):
 
 class UserRegisterForm(UserCreationForm):
 
-    new_user = crearUsuarioAuto()
     username = forms.CharField(
         label='',
-        initial=new_user["username"],
         widget=forms.TextInput(
             attrs={
                 'class':'form-control my-4 py-2',
-                'placeholder':'Enter your username'
+                'placeholder':'Enter your username',
+                'readonly':True
             }
-        ),
-        disabled=True,
+        )
         
     )
 
@@ -70,14 +68,13 @@ class UserRegisterForm(UserCreationForm):
 
     email = forms.CharField(
         label='',
-        initial=new_user["email"],
         widget=forms.EmailInput(
             attrs={
                 'class':'form-control my-4 py-2',
-                'placeholder':'Email'
+                'placeholder':'Email',
+                'readonly':True
             }
-        ),
-        disabled=True
+        )
     )
 
     avatar = forms.CharField(

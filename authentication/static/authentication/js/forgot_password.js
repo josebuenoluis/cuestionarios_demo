@@ -11,6 +11,7 @@ function inputsVerificarToken(){
     postGenerarToken(email).then(data => {
         if(data.status == true){
             tokenInput.disabled = false;
+            tokenInput.value = data.token;
             btnGenerarToken.disabled = false;
             btnGenerarToken.textContent = "Verificar token";
             btnGenerarToken.className = "btn btn-primary";

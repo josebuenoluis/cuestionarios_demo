@@ -68,5 +68,6 @@
     </main>
 {% endblock %} 
 {% block scripts %}
+{{new_user|json_script:"user-data"}}
 <script src="{% static 'authentication/js/register.js' %}"></script>
 {% endblock %}

@@ -65,13 +65,16 @@ class RegisterView(View):
         form = UserRegisterForm()
         avatares = obtener_avatares_cache()
         new_user = crearUsuarioAuto()
+        print(new_user)
         return render(request,'authentication/register.html',{"form":form,'avatares':avatares,'avatar_usuario':avatares[0],
-                                                              "user":new_user})
+                                                              "new_user":new_user})
 
     def post(self,request):
         form = UserRegisterForm(request.POST)
+        print("POST FORMULARIO")
         if form.is_valid():
             user = form.save(commit=False)
+            print(user)
             username = form.cleaned_data.get("username")
             password1 = form.cleaned_data.get("password1")
             user.is_active = False
@@ -112,7 +115,6 @@ class OlvidoPasswordView(View):
         try:
             usuario = Usuarios.objects.get(email=email)
         except Usuarios.DoesNotExist:
-            # No revelar si el email existe; devolver un error genérico
             return JsonResponse({"status": False, "error": "invalid_email"}, status=400)
 
         usuario.set_password(password_new)
@@ -130,9 +132,9 @@ class TokenAuthView(View):
             usuario = Usuarios.objects.get(email=email)
             token_instance = TokenChange.objects.create(user_fk=usuario)
             token = token_instance.token
-            enviarCorreo(usuario.username,usuario.email,token_instance.token)
+            # enviarCorreo(usuario.username,usuario.email,token_instance.token)
             print("Token generado: ",token)
-            return JsonResponse({"status":True})
+            return JsonResponse({"status":True,"token":token})
         
         elif tipo == "verificar":
             data = json.loads(request.body)
@@ -146,3 +148,4 @@ class TokenAuthView(View):
                     print("Token no existente")
                     return JsonResponse({"status":False})
         return JsonResponse({"status":""})
+    

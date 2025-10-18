@@ -2,9 +2,12 @@ let avatar = "";
 let containerAvatarSelected = document.getElementById("containerAvatarSelected");
 let modalAvatar = new bootstrap.Modal(document.getElementById('staticBackdrop'));
 let inputAvatar = document.getElementById("avatar_input");
-
-document.getElementById("id_password1").value = "pruebausuario12345678";
-document.getElementById("id_password2").value = "pruebausuario12345678";
+const user = JSON.parse(document.getElementById('user-data').textContent);
+console.log(user);
+document.getElementById("id_username").value = user["username"];
+document.getElementById("id_password1").value = user["password"];
+document.getElementById("id_password2").value = user["password"];
+document.getElementById("id_email").value = user["email"];
 
 inputAvatar.value = containerAvatarSelected.querySelector("svg").outerHTML;
 function seleccionarAvatar(event) {
